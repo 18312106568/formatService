@@ -39,6 +39,8 @@ public class SqlParser {
     final String RBRACK = ")";
 
     final String COMMENT = "comment";
+    
+    final String PREFIX = "TB_";
 
     /**
      * 空格缩进换行去除
@@ -61,7 +63,13 @@ public class SqlParser {
     public String getTableName(String sql){
         sql = sql.substring(0,sql.indexOf(LBRACK));
         String[] sqlArr = sql.split(" ");
-        return sqlArr[2];
+        return sqlArr[2].replaceAll(SYMBOL, "");
+    }
+    
+    public String getClassName(String tableName){
+        String className = ConverUtils.upperCase(ConverUtils.changeHungToCame(
+                        tableName.replace(PREFIX, "").toLowerCase()));
+        return className;
     }
 
     public List<FieldDto> getSqlFieldDtos(String sql) {
@@ -75,12 +83,13 @@ public class SqlParser {
                 continue;
             }
             FieldDto dto = new FieldDto();
-            dto.setFieldName(ConverUtils.changeHungToCame(columnArr[0]));
-            dto.setFieldType(SqlTypeMapped.getClassName(columnArr[1]));
+            dto.setAnnColumn(columnArr[0].toUpperCase());
+            dto.setName(ConverUtils.changeHungToCame(columnArr[0]));
+            dto.setType(SqlTypeMapped.getClassName(columnArr[1]));
             if (column.contains(COMMENT)) {
                 String comment = column.substring(column.indexOf(COMMENT), column.length() - 2);
                 String[] commentEntity = comment.split(" ");
-                dto.setFieldComment(commentEntity[1].replaceAll("'", ""));
+                dto.setComment(commentEntity[1].replaceAll("'", ""));
             }
             fieldDtoList.add(dto);
         }

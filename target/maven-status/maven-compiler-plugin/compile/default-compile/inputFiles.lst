@@ -1,5 +1,6 @@
-D:\program\git\formatService\src\main\java\com\mrb\formatservice\utils\ConverUtils.java
-D:\program\git\formatService\src\main\java\com\mrb\formatservice\enums\SqlTypeMapped.java
-D:\program\git\formatService\src\main\java\com\mrb\formatservice\FormatApplication.java
-D:\program\git\formatService\src\main\java\com\mrb\formatservice\core\SqlParser.java
-D:\program\git\formatService\src\main\java\com\mrb\formatservice\model\dto\FieldDto.java
+F:\github\formatService\src\main\java\com\mrb\formatservice\FormatApplication.java
+F:\github\formatService\src\main\java\com\mrb\formatservice\model\dto\FieldDto.java
+F:\github\formatService\src\main\java\com\mrb\formatservice\model\dto\BeanDto.java
+F:\github\formatService\src\main\java\com\mrb\formatservice\enums\SqlTypeMapped.java
+F:\github\formatService\src\main\java\com\mrb\formatservice\utils\ConverUtils.java
+F:\github\formatService\src\main\java\com\mrb\formatservice\core\SqlParser.java

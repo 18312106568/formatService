@@ -33,6 +33,10 @@ public class TestSqlParse extends FormatApplicationTest {
 		for(FieldDto dto : fieldDtoList) {
 			System.out.println(dto);
 		}
+                String tableName = sqlParse.getTableName(sql);
+                String className = sqlParse.getClassName(tableName);
+                System.out.println(sqlParse.getTableName(sql));
+                System.out.println(className);
 		
 	}
 }

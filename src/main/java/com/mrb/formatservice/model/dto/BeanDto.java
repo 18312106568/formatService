@@ -17,12 +17,15 @@ import lombok.Data;
  * @author MRB
  */
 @Data
-@AllArgsConstructor
 public class BeanDto implements Serializable{
-	/**
+    /**
+     * 包名
+     */
+    private String packageName;
+    /**
      * 类名
      */
-    private String clazzName;
+    private String className;
 
     /**
      * 表名
@@ -32,5 +35,5 @@ public class BeanDto implements Serializable{
     /**
      * 属性列表
      */
-    private List<FieldDto> columnList;
+    private List<FieldDto> fieldList;
 }

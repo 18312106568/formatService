@@ -4,9 +4,23 @@ import lombok.Data;
 
 @Data
 public class FieldDto {
-	private String fieldType;
+        /**
+         * 属性类型
+         */
+	private String type;
 	
-	private String fieldName;
+        /**
+         * 属性名
+         */
+	private String name;
 	
-	private String fieldComment;
+        /**
+         * 注释
+         */
+	private String comment;
+        
+        /**
+         * column注解name值
+         */
+        private String annColumn;
 }

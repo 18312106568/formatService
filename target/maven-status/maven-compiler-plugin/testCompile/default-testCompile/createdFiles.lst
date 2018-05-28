@@ -1,1 +1,3 @@
 com\mrb\formatService\TestSqlParse.class
+com\mrb\formatService\FormatApplicationTest.class
+org\dark\FreeMarketTest.class

@@ -2,9 +2,15 @@ server:
   port: 8080
 logging:
     file: /data/logs/digger/digger.log
-spring:
-    datasource:
-        driverClassName: com.mysql.jdbc.Driver
-        password: 123abc123abc
-        url: jdbc:mysql://localhost:3306/digger?characterEncoding=UTF-8
-        username: root
+spring:  
+    datasource:  
+        primary: 
+            driverClassName: com.mysql.jdbc.Driver
+            password: 123abc123abc
+            url: jdbc:mysql://localhost:3306/digger?characterEncoding=UTF-8
+            username: root
+        secondary: 
+            url : jdbc:mysql://localhost:3306/biz?characterEncoding=UTF-8
+            username : root
+            password : 123abc123abc
+            driverClassName : com.mysql.jdbc.Driver   

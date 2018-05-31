@@ -3,6 +3,8 @@ package ${bean.packageName};
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import lombok.Data;
+
 
 @Data
 @Entity

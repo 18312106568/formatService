@@ -36,7 +36,7 @@ public class FreeMarketTest extends FormatApplicationTest {
 
     @Autowired
     SqlParser sqlParse;
-    
+
     @Autowired
     EntityBuilder entityBuilder;
 
@@ -76,9 +76,9 @@ public class FreeMarketTest extends FormatApplicationTest {
         fos.flush();
         fos.close();
     }
-    
+
     @Test
-    public void testEntityBuilder(){
+    public void testEntityBuilder() {
         String sql = "CREATE TABLE `TB_TAXPAYMASTER_RESET_LOG` (\r\n"
                 + "  `ID` varchar(50) NOT NULL COMMENT '唯一标识',\r\n"
                 + "  `TAXPAYMASTER_ID` varchar(50) NOT NULL COMMENT '税单ID',\r\n"
@@ -91,5 +91,42 @@ public class FreeMarketTest extends FormatApplicationTest {
                 + "  PRIMARY KEY (`ID`)\r\n"
                 + ") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
         entityBuilder.buildEntity(sql);
+    }
+
+    @Test
+    public void testBuilderModel() {
+        StringBuilder sql = new StringBuilder("SELECT * FROM \n");
+        sql.append("(SELECT lr.CAP_REQUEST_NO as capRequestNo,")
+                .append("cb.ORG_CODE as orgCode,")
+                .append("cb.AUTHORIZE_NO as authorizeNo,")
+                .append("cb.`NAME` as corName,")
+                .append("cb.ORG_CUSTOMS_CODE as masterCustoms,")
+                .append("(l.DAYS+l.MONTHS*30+l.YEARS*365) as loanDays, ")
+                .append("l.AMOUNT as loanAmout,")
+                .append("l.TIMESETTLED as loanTimeSettled ,")
+                .append("l.METHOD as repayMethod,")
+                .append("	l.`STATUS` as loanStatus,")
+                .append("lr.DUEDATE as dueDate,")
+                .append("lr.REPAYDATE as repayDate,")
+                .append("lr.REPAYAMOUNT as repayAmount,")
+                .append("lo.ORDERID as loanReceipt,")
+                .append("sro.serno as repayReceipt,stm.statementNos as statementNos\n")
+                .append("FROM\n")
+                .append("	TB_LOAN_REPAYMENT lr\n")
+                .append("INNER JOIN \n")
+                .append("	TB_LOAN l ON lr.LOAN_ID = l.ID\n")
+                .append("LEFT JOIN \n")
+                .append("(SELECT GROUP_CONCAT(ro.RTRX_SERNO) serno ,ro.LOANREPAYID FROM TB_REPAY_ORDER ro\n")
+                .append(" where ro.STAT = 'P' GROUP BY ro.LOANREPAYID ) sro on sro.LOANREPAYID = lr.ID\n")
+                .append("LEFT JOIN\n")
+                .append(" TB_LOAN_ORDER lo ON lo.LOANID = l.ID \n")
+                .append("LEFT JOIN \n")
+                .append("	TB_USER u ON l.USER_ID = u.ID\n")
+                .append("LEFT JOIN\n")
+                .append("	TB_CORPORATION_BASE cb ON cb.ORG_CODE = u.ORG_CODE\n")
+                .append("LEFT JOIN \n")
+                .append("(select GROUP_CONCAT(tm.STATEMENT_NO) statementNos,tm.LOANID from TB_TAXPAYMASTER tm GROUP BY tm.LOANID) stm ON stm.LOANID = l.ID ")
+                .append(")t Limit 0 ,1");
+        entityBuilder.buildModel(sql.toString(), "com.mrb");
     }
 }

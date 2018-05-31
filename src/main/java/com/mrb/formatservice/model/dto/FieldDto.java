@@ -23,4 +23,9 @@ public class FieldDto {
          * column注解name值
          */
         private String annColumn;
+        
+        /**
+         * JsonProperty注解name值
+         */
+        private String annJsonProperty;
 }

@@ -87,7 +87,7 @@ public class SqlParser {
             dto.setName(ConverUtils.changeHungToCame(columnArr[0]));
             dto.setType(SqlTypeMapped.getClassName(columnArr[1]));
             if (column.contains(COMMENT)) {
-                String comment = column.substring(column.indexOf(COMMENT), column.length() - 2);
+                String comment = column.substring(column.indexOf(COMMENT), column.length() - 1);
                 String[] commentEntity = comment.split(" ");
                 dto.setComment(commentEntity[1].replaceAll("'", ""));
             }

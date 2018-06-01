@@ -50,6 +50,8 @@ public class EntityBuilder {
     final String PACKAGE = "com.mrb";
     
     final String AUTHOR = "MRB";
+    
+    final String ENCODE = "UTF-8";
 
     public void buildEntity(String sql) {
         buildEntity(sql, PACKAGE);
@@ -75,7 +77,7 @@ public class EntityBuilder {
             root.put("bean", bean);
             String fileName = className.concat(JAVA_FIX);
             OutputStream fos = new FileOutputStream(new File(TEMP_DIR, fileName));
-            Writer out = new OutputStreamWriter(fos);
+            Writer out = new OutputStreamWriter(fos,ENCODE);
             temp.process(root, out);
             fos.flush();
             fos.close();
@@ -106,7 +108,7 @@ public class EntityBuilder {
             root.put("model", model);
             String fileName = className.concat(JAVA_FIX);
             OutputStream fos = new FileOutputStream(new File(TEMP_DIR, fileName));
-            Writer out = new OutputStreamWriter(fos);
+            Writer out = new OutputStreamWriter(fos,ENCODE);
             temp.process(root, out);
             fos.flush();
             fos.close();

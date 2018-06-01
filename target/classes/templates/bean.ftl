@@ -12,7 +12,7 @@ import lombok.Data;
 public class ${bean.className}{
 
     <#list bean.fieldList as field>
-    <#if field.comment != ''>
+    <#if (field.comment)?? && field.comment != ''>
     /**
     *  ${field.comment}
     */

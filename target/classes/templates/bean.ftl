@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "${bean.tableName}")
-public class ${bean.className}{
+public class ${bean.className} extends EntityId{
 
     <#list bean.fieldList as field>
     <#if (field.comment)?? && field.comment != ''>
@@ -18,6 +18,9 @@ public class ${bean.className}{
     */
     </#if>
     @Column(name = "${field.annColumn}")
+    <#if (field.type)?? && field.type == 'Date'>
+    @Temporal(TemporalType.TIMESTAMP)
+    </#if>
     private ${field.type} ${field.name};
 
     </#list>

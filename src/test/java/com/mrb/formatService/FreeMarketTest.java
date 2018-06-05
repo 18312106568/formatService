@@ -43,50 +43,13 @@ public class FreeMarketTest extends FormatApplicationTest {
     @Test
     public void testChangePostfix() throws TemplateNotFoundException, MalformedTemplateNameException, ParseException, IOException, TemplateException {
 
-        String sql = "CREATE TABLE `TB_YHX_DECLARATION` (\n"
-                + "  `ID` varchar(50) NOT NULL,\n"
-                + "  `IMPORT_EXPORT_FLAG` varchar(2) DEFAULT NULL COMMENT '进出口标示 I-进口，E-出口',\n"
-                + "  `TYPE` varchar(20) DEFAULT NULL COMMENT '业务类型',\n"
-                + "  `DECLEAR_LOCATION` varchar(255) DEFAULT NULL COMMENT '申报地海关',\n"
-                + "  `CUSTOM` varchar(255) DEFAULT NULL COMMENT '出口口岸',\n"
-                + "  `COMPANY_SOCIAL_CODE` varchar(50) DEFAULT NULL COMMENT '收发货人编码',\n"
-                + "  `COMPANY_NAME` varchar(255) DEFAULT NULL COMMENT '收发货人名称',\n"
-                + "  `ENTERPRISE` varchar(20) DEFAULT NULL COMMENT '企业性质',\n"
-                + "  `COMPANY2_SOCIAL_CODE` varchar(50) DEFAULT NULL COMMENT '生产销售单位编号',\n"
-                + "  `COMPANY2_NAME` varchar(255) DEFAULT NULL COMMENT '生产销售单位名称',\n"
-                + "  `REPORT_COMPANY_SOCIAL_CODE` varchar(50) DEFAULT NULL COMMENT '申报单位编码',\n"
-                + "  `REPORT_COMPANY_NAME` varchar(255) DEFAULT NULL COMMENT '申报单位名称',\n"
-                + "  `TRANSPORT_TYPE` varchar(50) DEFAULT NULL COMMENT '运输方式',\n"
-                + "  `TRANSPORT_TOOL` varchar(255) DEFAULT NULL COMMENT '运输工具名称',\n"
-                + "  `TRANSPORT_NUM` varchar(50) DEFAULT NULL COMMENT '航次号',\n"
-                + "  `BLNO` varchar(50) DEFAULT NULL COMMENT '提运单号',\n"
-                + "  `JIANGUAN` varchar(50) DEFAULT NULL COMMENT '监管方式',\n"
-                + "  `TAX` varchar(50) DEFAULT NULL COMMENT '征免性质',\n"
-                + "  `PAYMENT` decimal(15,2) DEFAULT NULL COMMENT '征税比例',\n"
-                + "  `NSDW` varchar(50) DEFAULT NULL COMMENT '纳税单位',\n"
-                + "  `COUNTRY` varchar(50) DEFAULT NULL COMMENT '运抵国（地区）',\n"
-                + "  `HARBOUR` varchar(50) DEFAULT NULL COMMENT '指运港',\n"
-                + "  `CHURCHYARD` varchar(50) DEFAULT NULL COMMENT '境内货源地',\n"
-                + "  `DEAL_MODE` varchar(50) DEFAULT NULL COMMENT '成交方式',\n"
-                + "  `CARRIAGE_TYPE` varchar(50) DEFAULT NULL COMMENT '运费类型',\n"
-                + "  `CARRIAGE_PRICE` decimal(15,2) DEFAULT NULL COMMENT '运费金额',\n"
-                + "  `CARRIAGE_CURRENCY` varchar(20) DEFAULT NULL COMMENT '运费币制',\n"
-                + "  `PREMIUM_TYPE` varchar(50) DEFAULT NULL COMMENT '保费类型',\n"
-                + "  `PREMIUM_PRICE` varchar(50) DEFAULT NULL COMMENT '保费金额',\n"
-                + "  `PREMIUM_CURRENCY` varchar(20) DEFAULT NULL COMMENT '保费币制',\n"
-                + "  `BOX_NUM` int(4) DEFAULT NULL COMMENT '件数',\n"
-                + "  `BOX_TYPE` varchar(50) DEFAULT NULL COMMENT '包装种类',\n"
-                + "  `GROSS_WEIGHT` int(4) DEFAULT NULL COMMENT '毛重(KG)',\n"
-                + "  `NET_WEIGHT` int(4) DEFAULT NULL COMMENT '净重(KG)',\n"
-                + "  `TRADING_COUNTRY` varchar(50) DEFAULT NULL COMMENT '贸易国(地区)',\n"
-                + "  `RELATIVE_ENTRY_NO` varchar(50) DEFAULT NULL COMMENT '关联报关单号',\n"
-                + "  `RELATIVE_ENROL_NO` varchar(50) DEFAULT NULL COMMENT '关联备案号',\n"
-                + "  `BSJG_PLACE` varchar(50) DEFAULT NULL COMMENT '保税/监管场所',\n"
-                + "  `YARD_CODE` varchar(50) DEFAULT NULL COMMENT '货场代码',\n"
-                + "  `PRERECORD_SN` varchar(50) DEFAULT NULL COMMENT '报关单号',\n"
-                + "  `PRERECORD_SN_TIME` datetime DEFAULT NULL COMMENT '报关单申报时间',\n"
-                + "  PRIMARY KEY (`ID`)\n"
-                + ") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+        String sql = "CREATE TABLE TB_YHX_DECLARATION_FAIL (\n" +
+"	ID VARCHAR (50),\n" +
+"	ORG_CUSTOMS_CODE VARCHAR (10) COMMENT '海关十位编码',\n" +
+"	START_TIME datetime COMMENT '失败区间-开始时间',\n" +
+"	END_TIME datetime COMMENT '失败区间-结束时间',\n" +
+"	PRIMARY KEY (`ID`)\n" +
+")";
         List<FieldDto> fieldDtoList = sqlParse.getSqlFieldDtos(sql);
 //        System.out.println(fieldDtoList.size());
 //        for (FieldDto dto : fieldDtoList) {
@@ -112,13 +75,18 @@ public class FreeMarketTest extends FormatApplicationTest {
 
     @Test
     public void testEntityBuilder() {
-        String sql = "CREATE TABLE TB_YHX_DECLARATION_RECORD(\n"
-                + "	ID varchar(50),\n"
-                + "	ORG_CUSTOMS_CODE varchar(10) COMMENT '海关十位编码',\n"
-                + "	CREATE_TIME datetime COMMENT '易航线注册时间',\n"
-                + "	EDIT_TIME datetime COMMENT '报关单最后同步时间',\n"
-                + "	PRIMARY KEY (`ID`)\n"
-                + ");";
+        String sql = "CREATE TABLE `TB_REISSUE_NOTIFY` (\n"
+                + "  `ID` varchar(50) NOT NULL,\n"
+                + "  `MEDIA_TYPE` varchar(50) NOT NULL COMMENT '请求类型',\n"
+                + "  `URL` varchar(255) DEFAULT NULL COMMENT '请求地址',\n"
+                + "  `BODY_PARAM` text COMMENT '请求参数',\n"
+                + "  `STATUS` varchar(20) DEFAULT NULL COMMENT '补发状态',\n"
+                + "  `FAILREASON` text COMMENT '失败原因',\n"
+                + "  `CREATE_TIME` datetime DEFAULT NULL COMMENT '创建时间',\n"
+                + "  `EDIT_TIME` datetime DEFAULT NULL COMMENT '最后补发时间',\n"
+                + "  `TOTAL` int(4) DEFAULT '0' COMMENT '总补发数',\n"
+                + "  PRIMARY KEY (`ID`)\n"
+                + ") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
         entityBuilder.buildEntity(sql);
     }
 

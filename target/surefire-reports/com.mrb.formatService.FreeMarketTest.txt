@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.mrb.formatService.FreeMarketTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.528 sec - in com.mrb.formatService.FreeMarketTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.109 sec - in com.mrb.formatService.FreeMarketTest

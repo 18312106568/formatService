@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.mrb.formatService.FreeMarketTest" time="0.142" tests="1" errors="0" skipped="0" failures="0">
+<testsuite name="com.mrb.formatService.FreeMarketTest" time="0.125" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="D:\Program Files\Java\jdk1.8.0_152\jre\bin"/>
@@ -61,5 +61,5 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="testEntityBuilder" classname="com.mrb.formatService.FreeMarketTest" time="0.142"/>
+  <testcase name="testEntityBuilder" classname="com.mrb.formatService.FreeMarketTest" time="0.125"/>
 </testsuite>
